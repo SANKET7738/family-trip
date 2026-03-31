@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Trip 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F2EC;
+  --card: #FFFFFF;
+  --text: #18150E;
+  --muted: #7A7369;
+  --border: #E4DDD3;
+  --accent: #B84A2A;
+  --accent2: #2A6B4F;
+  --warn: #8C5A0A;
+  --danger: #922030;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);padding-bottom:80px;font-size:14px;line-height:1.6;}
+
+/* HERO */
+.hero{background:#18150E;color:#F5F2EC;padding:52px 20px 44px;position:relative;overflow:hidden;}
+.hero-deco{position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;border:60px solid rgba(184,74,42,0.12);pointer-events:none;}
+.hero-deco2{position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;border-radius:50%;border:40px solid rgba(184,74,42,0.07);pointer-events:none;}
+.hero-tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,8vw,52px);font-weight:700;line-height:1.1;margin-bottom:14px;}
+.hero h1 span{color:var(--accent);}
+.hero-sub{font-size:13px;color:rgba(245,242,236,.55);max-width:320px;line-height:1.7;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.chip{background:rgba(245,242,236,.09);border:1px solid rgba(245,242,236,.15);border-radius:20px;padding:5px 13px;font-size:11px;color:rgba(245,242,236,.75);}
+
+/* STICKY NAV */
+.snav{position:sticky;top:0;z-index:200;background:rgba(245,242,236,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+.snav-scroll{overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:0 16px;}
+.snav-scroll::-webkit-scrollbar{display:none;}
+.snav-inner{display:inline-flex;}
+.nb{padding:12px 13px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:.2s;white-space:nowrap;}
+.nb.active{color:var(--text);font-weight:500;border-bottom-color:var(--accent);}
+.nb.dim{opacity:.5;}
+
+/* SECTIONS */
+.sec{display:none;padding:22px 16px;max-width:640px;margin:0 auto;}
+.sec.active{display:block;}
+.sec-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+
+/* OVERVIEW HERO CARDS */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.ov-card{border-radius:16px;overflow:hidden;position:relative;min-height:140px;cursor:pointer;}
+.ov-card img{width:100%;height:100%;object-fit:cover;display:block;}
+.ov-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(24,21,14,.85) 0%,rgba(24,21,14,.2) 60%,transparent 100%);}
+.ov-card-body{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;}
+.ov-card-flag{font-size:18px;line-height:1;}
+.ov-card-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#F5F2EC;line-height:1.2;}
+.ov-card-price{font-size:11px;color:rgba(245,242,236,.7);margin-top:2px;}
+.ov-card-badge{position:absolute;top:10px;right:10px;padding:3px 9px;border-radius:12px;font-size:10px;font-weight:500;}
+.ob-green{background:rgba(42,107,79,.85);color:#C8EDD9;}
+.ob-red{background:rgba(146,32,48,.85);color:#FBCDD3;}
+.ov-card.featured{grid-column:span 2;min-height:180px;}
+
+/* SCORE CARD */
+.score-row{display:grid;grid-template-columns:100px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.score-row:last-child{border-bottom:none;}
+.score-label{color:var(--muted);}
+.score-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.score-fill{height:100%;border-radius:3px;transition:width .6s ease;}
+.score-val{font-weight:500;text-align:right;white-space:nowrap;}
+
+/* DEST PAGE */
+.dest-hero{border-radius:20px;overflow:hidden;position:relative;height:200px;margin-bottom:16px;}
+.dest-hero img{width:100%;height:100%;object-fit:cover;}
+.dest-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(24,21,14,.9) 0%,rgba(24,21,14,.3) 50%,transparent 100%);}
+.dest-hero-body{position:absolute;bottom:0;left:0;right:0;padding:18px 20px;}
+.dest-hero-flag{font-size:30px;line-height:1;margin-bottom:4px;}
+.dest-hero-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#F5F2EC;}
+.dest-hero-sub{font-size:11px;color:rgba(245,242,236,.6);margin-top:2px;}
+
+/* QUICK FACTS GRID */
+.qf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.qf{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;}
+.qf-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.qf-val{font-size:13px;font-weight:500;line-height:1.4;}
+.qf-val.green{color:var(--accent2);}
+.qf-val.red{color:var(--danger);}
+.qf-val.amber{color:var(--warn);}
+
+/* TOTAL BANNER */
+.total-banner{border-radius:16px;padding:16px 18px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
+.tb-label{font-size:11px;color:var(--muted);}
+.tb-amount{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;}
+.tb-note{font-size:10px;color:var(--muted);margin-top:2px;}
+.tb-green{background:var(--accent2);color:#F5F2EC;}
+.tb-amber{background:#7B4A08;color:#F5F2EC;}
+.tb-red{background:var(--danger);color:#F5F2EC;}
+
+/* COST BREAKDOWN */
+.cb-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;}
+.cb-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:12px 16px 10px;border-bottom:1px solid var(--border);}
+.cb-row{display:flex;justify-content:space-between;align-items:center;padding:9px 16px;border-bottom:1px solid var(--border);font-size:13px;}
+.cb-row:last-child{border-bottom:none;}
+.cb-row-label{color:var(--muted);}
+.cb-row-val{font-weight:500;}
+.cb-total{background:var(--bg);padding:10px 16px;display:flex;justify-content:space-between;font-size:13px;font-weight:500;}
+
+/* ITINERARY */
+.itin-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;}
+.itin-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:12px 16px 10px;border-bottom:1px solid var(--border);}
+.itin-day{border-bottom:1px solid var(--border);}
+.itin-day:last-child{border-bottom:none;}
+.itin-day-header{padding:12px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;}
+.itin-day-num{width:32px;height:32px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--muted);flex-shrink:0;}
+.itin-day-info{flex:1;}
+.itin-day-title{font-size:13px;font-weight:500;}
+.itin-day-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.itin-day-body{padding:0 16px 14px 60px;display:none;}
+.itin-day-body.open{display:block;}
+.itin-point{font-size:12px;color:var(--muted);padding:4px 0 4px 16px;position:relative;line-height:1.5;}
+.itin-point::before{content:'·';position:absolute;left:4px;color:var(--accent);}
+.itin-day-img{width:100%;border-radius:10px;margin-top:10px;object-fit:cover;height:130px;display:block;}
+
+/* SITES GALLERY */
+.gallery-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.gallery-item{border-radius:12px;overflow:hidden;aspect-ratio:1;position:relative;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery-item-label{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(24,21,14,.8));font-size:10px;color:#F5F2EC;line-height:1.3;}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap;}
+.bg-green{background:#E4F4EC;color:#1D5C3A;}
+.bg-amber{background:#FEF0DC;color:#7B4A08;}
+.bg-red{background:#FDECEA;color:#922030;}
+.bg-blue{background:#E8F0FA;color:#1A4A7A;}
+
+/* CALLOUT CARDS */
+.callout{border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:3px solid;}
+.callout h4{font-size:13px;font-weight:500;margin-bottom:5px;}
+.callout p{font-size:12px;line-height:1.65;}
+.co-green{background:#E4F4EC;border-color:var(--accent2);color:#1A3D2A;}
+.co-amber{background:#FEF0DC;border-color:#C97B1A;color:#5C3A08;}
+.co-red{background:#FDECEA;border-color:var(--danger);color:#6A1520;}
+.co-blue{background:#E8F0FA;border-color:#2A5FA0;color:#132F5C;}
+
+/* OVERVIEW TABLE */
+.ot{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;}
+.ot-row{display:grid;grid-template-columns:1fr 78px 78px;border-bottom:1px solid var(--border);font-size:12px;}
+.ot-row:last-child{border-bottom:none;}
+.ot-cell{padding:10px 12px;border-right:1px solid var(--border);display:flex;align-items:center;}
+.ot-cell:last-child{border-right:none;justify-content:center;}
+.ot-cell:nth-child(2){justify-content:center;}
+.ot-head{background:var(--bg);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:500;}
+.ot-row.dim{opacity:.45;}
+
+/* VERDICT */
+.verdict{background:#18150E;color:#F5F2EC;border-radius:20px;padding:22px 20px;margin-bottom:16px;position:relative;overflow:hidden;}
+.verdict::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;border:30px solid rgba(184,74,42,.18);}
+.verdict-tag{font-size:10px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.verdict h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:8px;}
+.verdict p{font-size:12px;color:rgba(245,242,236,.65);line-height:1.7;}
+
+/* TIPS */
+.tip-list{list-style:none;}
+.tip-list li{padding:9px 0 9px 20px;border-bottom:1px solid var(--border);font-size:12px;position:relative;line-height:1.6;}
+.tip-list li::before{content:'→';position:absolute;left:0;color:var(--accent);}
+.tip-list li:last-child{border-bottom:none;}
+.tip-block{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px;}
+.tip-block-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+
+/* WEATHER GRID */
+.wx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;}
+.wx-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;}
+.wx-flag{font-size:16px;margin-bottom:4px;}
+.wx-name{font-size:12px;font-weight:500;margin-bottom:4px;}
+.wx-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+
+/* FOOTNOTE */
+.fn{font-size:11px;color:var(--muted);line-height:1.7;background:var(--card);border-radius:12px;padding:13px 15px;border:1px solid var(--border);margin-top:14px;}
+
+/* OVER BUDGET BANNER */
+.ob-stripe{background:var(--danger);color:#F5F2EC;padding:8px 16px;font-size:11px;font-weight:500;display:flex;align-items:center;gap:6px;border-radius:12px;margin-bottom:14px;}
+
+/* CHEVRON */
+.chev{margin-left:auto;font-size:12px;color:var(--muted);transition:.2s;}
+.chev.open{transform:rotate(180deg);}
+
+@media(max-width:420px){.ov-grid{grid-template-columns:1fr;}.ov-card.featured{grid-column:span 1;}.qf-grid{grid-template-columns:1fr 1fr;}.gallery{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-deco"></div><div class="hero-deco2"></div>
+  <div class="hero-tag">Family Trip Planner · 2026</div>
+  <h1>Where are we<br>going <span>this year?</span></h1>
+  <p class="hero-sub">8 destinations compared — costs, visa, day-by-day itinerary, photos and more. Family of 4 · May–June 2026 · Budget ₹50–80k/person</p>
+  <div class="hero-chips">
+    <span class="chip">✈ Flights</span>
+    <span class="chip">🛂 Visa costs & tips</span>
+    <span class="chip">📅 Day-wise itinerary</span>
+    <span class="chip">🌤 Weather check</span>
+    <span class="chip">🎯 Kid-friendliness</span>
+  </div>
+</div>
+
+<nav class="snav">
+  <div class="snav-scroll">
+    <div class="snav-inner">
+      <button class="nb active" onclick="show('overview',this)">Overview</button>
+      <button class="nb" onclick="show('nepal',this)">🇳🇵 Nepal</button>
+      <button class="nb" onclick="show('bhutan',this)">🇧🇹 Bhutan</button>
+      <button class="nb" onclick="show('srilanka',this)">🇱🇰 Sri Lanka</button>
+      <button class="nb" onclick="show('bali',this)">🇮🇩 Bali</button>
+      <button class="nb" onclick="show('malaysia',this)">🇲🇾 Malaysia</button>
+      <button class="nb" onclick="show('thailand',this)">🇹🇭 Thailand</button>
+      <button class="nb dim" onclick="show('vietnam',this)">🇻🇳 Vietnam ⚠</button>
+      <button class="nb dim" onclick="show('singapore',this)">🇸🇬 Singapore ⚠</button>
+      <button class="nb" onclick="show('tips',this)">📋 Tips</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ OVERVIEW ═══════════ -->
+<div id="overview" class="sec active">
+  <div class="sec-tag">8 destinations · all compared</div>
+
+  <div class="verdict" style="margin-bottom:16px;">
+    <div class="verdict-tag">Top pick for May–June 2026</div>
+    <h3>Bali is the clear winner</h3>
+    <p>It's Bali's dry season in May–June — perfect beach weather while most other destinations are entering monsoon. 7 nights, all-inclusive, visa on arrival at the airport. Bhutan is the runner-up: visa-free, coolest weather, most unique experience.</p>
+  </div>
+
+  <!-- photo grid -->
+  <div class="ov-grid">
+    <div class="ov-card featured" onclick="show('bali',document.querySelectorAll('.nb')[4])">
+      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80" alt="Bali">
+      <div class="ov-card-overlay"></div>
+      <div class="ov-card-body">
+        <div class="ov-card-flag">🇮🇩</div>
+        <div class="ov-card-name">Bali, Indonesia</div>
+        <div class="ov-card-price">~₹73k/person all-in · 7 nights · Dry season ✓</div>
+      </div>
+      <span class="ov-card-badge ob-green">🏆 Top Pick</span>
+    </div>
+    <div class="ov-card" onclick="show('bhutan',document.querySelectorAll('.nb')[2])">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Bhutan">
+      <div class="ov-card-overlay"></div>
+      <div class="ov-card-body">
+        <div class="ov-card-flag">🇧🇹</div>
+        <div class="ov-card-name">Bhutan</div>
+        <div class="ov-card-price">~₹50k/person · Visa-free</div>
+      </div>
+      <span class="ov-card-badge ob-green">🥈 Runner Up</span>
+    </div>
+    <div class="ov-card" onclick="show('malaysia',document.querySelectorAll('.nb')[5])">
+      <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80" alt="Malaysia">
+      <div class="ov-card-overlay"></div>
+      <div class="ov-card-body">
+        <div class="ov-card-flag">🇲🇾</div>
+        <div class="ov-card-name">Malaysia</div>
+        <div class="ov-card-price">~₹71k/person · Best value</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- comparison table -->
+  <div class="ot">
+    <div class="ot-row"><div class="ot-cell ot-head">Destination</div><div class="ot-cell ot-head">Per person</div><div class="ot-cell ot-head">Family of 4</div></div>
+    <div class="ot-row"><div class="ot-cell">🇳🇵 Nepal — 8D/7N</div><div class="ot-cell">~₹38k</div><div class="ot-cell">~₹1.5L</div></div>
+    <div class="ot-row"><div class="ot-cell">🇧🇹 Bhutan — 9D/8N</div><div class="ot-cell">~₹50k</div><div class="ot-cell">~₹2.0L</div></div>
+    <div class="ot-row"><div class="ot-cell">🇱🇰 Sri Lanka — 7D/6N</div><div class="ot-cell">~₹58k</div><div class="ot-cell">~₹2.3L</div></div>
+    <div class="ot-row"><div class="ot-cell">🇲🇾 Malaysia (KL) — 4D/3N</div><div class="ot-cell">~₹71k</div><div class="ot-cell">~₹2.8L</div></div>
+    <div class="ot-row"><div class="ot-cell">🇹🇭 Thailand — 6D/5N</div><div class="ot-cell">~₹72k</div><div class="ot-cell">~₹2.9L</div></div>
+    <div class="ot-row"><div class="ot-cell">🇮🇩 Bali — 7D/6N</div><div class="ot-cell">~₹73k</div><div class="ot-cell">~₹2.9L</div></div>
+    <div class="ot-row dim"><div class="ot-cell">🇻🇳 Vietnam — 7D/6N ⚠</div><div class="ot-cell" style="color:var(--danger)">~₹1.2L</div><div class="ot-cell" style="color:var(--danger)">~₹4.8L</div></div>
+    <div class="ot-row dim"><div class="ot-cell">🇸🇬 Singapore — 5D/4N ⚠</div><div class="ot-cell" style="color:var(--danger)">~₹1.5L</div><div class="ot-cell" style="color:var(--danger)">~₹6.0L</div></div>
+  </div>
+
+  <!-- score comparison -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:16px;">
+    <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;">How destinations compare</div>
+    <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">Value for money (within ₹80k budget)</div>
+    <div class="score-row"><span class="score-label">🇧🇹 Bhutan</span><div class="score-bar"><div class="score-fill" style="width:97%;background:#2A6B4F;"></div></div><span class="score-val" style="color:#2A6B4F;">★ 9.7</span></div>
+    <div class="score-row"><span class="score-label">🇮🇩 Bali</span><div class="score-bar"><div class="score-fill" style="width:92%;background:#2A6B4F;"></div></div><span class="score-val" style="color:#2A6B4F;">★ 9.2</span></div>
+    <div class="score-row"><span class="score-label">🇲🇾 Malaysia</span><div class="score-bar"><div class="score-fill" style="width:88%;background:#8C5A0A;"></div></div><span class="score-val" style="color:#8C5A0A;">★ 8.8</span></div>
+    <div class="score-row"><span class="score-label">🇱🇰 Sri Lanka</span><div class="score-bar"><div class="score-fill" style="width:85%;background:#8C5A0A;"></div></div><span class="score-val" style="color:#8C5A0A;">★ 8.5</span></div>
+    <div class="score-row"><span class="score-label">🇹🇭 Thailand</span><div class="score-bar"><div class="score-fill" style="width:82%;background:#8C5A0A;"></div></div><span class="score-val" style="color:#8C5A0A;">★ 8.2</span></div>
+    <div class="score-row"><span class="score-label">🇳🇵 Nepal</span><div class="score-bar"><div class="score-fill" style="width:78%;background:#8C5A0A;"></div></div><span class="score-val" style="color:#8C5A0A;">★ 7.8</span></div>
+    <div style="margin-top:16px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Kid-friendliness</div>
+    <div class="score-row"><span class="score-label">🇸🇬 Singapore</span><div class="score-bar"><div class="score-fill" style="width:100%;background:#2A6B4F;"></div></div><span class="score-val" style="color:#2A6B4F;">★ 10</span></div>
+    <div class="score-row"><span class="score-label">🇮🇩 Bali</span><div class="score-bar"><div class="score-fill" style="width:93%;background:#2A6B4F;"></div></div><span class="score-val" style="color:#2A6B4F;">★ 9.3</span></div>
+    <div class="score-row"><span class="score-label">🇲🇾 Malaysia</span><div class="score-bar"><div class="score-fill" style="width:90%;background:#2A6B4F;"></div></div><span class="score-val" style="color:#2A6B4F;">★ 9.0</span></div>
+    <div class="score-row"><span class="score-label">🇹🇭 Thailand</span><div class="score-bar"><div class="score-fill" style="width:88%;background:#8C5A0A;"></div></div><span class="score-val" style="color:#8C5A0A;">★ 8.8</span></div>
+    <div class="score-row"><span class="score-label">🇱🇰 Sri Lanka</span><div class="score-bar"><div class="score-fill" style="width:80%;background:#8C5A0A;"></div></div><span class="score-val" style="color:#8C5A0A;">★ 8.0</span></div>
+    <div class="score-row"><span class="score-label">🇧🇹 Bhutan</span><div class="score-bar"><div class="score-fill" style="width:75%;background:#8C5A0A;"></div></div><span class="score-val" style="color:#8C5A0A;">★ 7.5</span></div>
+  </div>
+
+  <div class="callout co-amber"><h4>⚠ Weather warning for May–June</h4><p>Sri Lanka (west coast monsoon), Vietnam north (heavy monsoon — ruins Ha Long cruise), Thailand (rainy season, manageable), Nepal (pre-monsoon heat + rains start). <strong>Bali and Bhutan have the best weather</strong> in this window.</p></div>
+  <p class="fn">All estimates include: package + GST (5%) + visa + shopping + personal spends + insurance. Vietnam and Singapore exceed ₹80k/person but are fully detailed. Verify exact May–June prices with Veena World: 1800 313 5555.</p>
+</div>
+
+<!-- ═══════════ NEPAL ═══════════ -->
+<div id="nepal" class="sec">
+  <div class="sec-tag">Nepal</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80" alt="Nepal">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇳🇵</div>
+      <div class="dest-hero-name">Nepal</div>
+      <div class="dest-hero-sub">Veena World NPCP · 8 Days / 7 Nights · Kathmandu + Pokhara + Chitwan</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-green" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹38,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹1.5 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">✅</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights</div><div class="qf-val green">Included ✓</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val green">FREE for Indians</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val green">All 3 meals daily</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val green">Included throughout</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val green">Not required</div></div>
+    <div class="qf"><div class="qf-label">Currency</div><div class="qf-val">Indian ₹ accepted</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val amber">Pre-monsoon</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐⭐</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (Veena World NPCP)</span><span class="cb-row-val">₹28,000–35,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹1,400–1,750</span></div>
+    <div class="cb-row"><span class="cb-row-label">Visa</span><span class="cb-row-val" style="color:var(--accent2)">₹0 (free)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Flights</span><span class="cb-row-val" style="color:var(--accent2)">Included</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping (estimate)</span><span class="cb-row-val">~₹1,250 (₹5k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Personal spends / tips</span><span class="cb-row-val">~₹1,500</span></div>
+    <div class="cb-row"><span class="cb-row-label">Travel insurance</span><span class="cb-row-val">Included (under 60)</span></div>
+    <div class="cb-total"><span>Total per person</span><span>~₹38,000</span></div>
+  </div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1562462181-b228e3cff9ad?w=400&q=80" alt="Pashupatinath"><div class="gallery-item-label">Pashupatinath Temple</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1585938389612-a552a28d6914?w=400&q=80" alt="Pokhara"><div class="gallery-item-label">Phewa Lake, Pokhara</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1549144511-f099e773c147?w=400&q=80" alt="Chitwan"><div class="gallery-item-label">Chitwan National Park</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">1</div>
+        <div class="itin-day-info"><div class="itin-day-title">Arrival in Kathmandu</div><div class="itin-day-sub">Flight from India · hotel check-in · rest</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80" alt="Kathmandu" class="itin-day-img">
+        <div class="itin-point">Fly from your city to Tribhuvan International Airport, Kathmandu</div>
+        <div class="itin-point">Check in to hotel — typically 3-star in Thamel area</div>
+        <div class="itin-point">Welcome dinner with the tour group</div>
+        <div class="itin-point">Evening stroll around Thamel market (optional)</div>
+      </div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">2</div>
+        <div class="itin-day-info"><div class="itin-day-title">Kathmandu city tour</div><div class="itin-day-sub">Pashupatinath · Boudhanath · Swayambhunath</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <div class="itin-point">Pashupatinath Temple — one of the holiest Hindu shrines in the world, on the banks of the Bagmati river</div>
+        <div class="itin-point">Boudhanath Stupa — massive Buddhist stupa, a UNESCO World Heritage Site</div>
+        <div class="itin-point">Swayambhunath (Monkey Temple) — hilltop temple with panoramic city views</div>
+        <div class="itin-point">Kathmandu Durbar Square — ancient royal palace and courtyards</div>
+        <img src="https://images.unsplash.com/photo-1562462181-b228e3cff9ad?w=600&q=80" alt="Kathmandu" class="itin-day-img">
+      </div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">3</div>
+        <div class="itin-day-info"><div class="itin-day-title">Nagarkot + Patan</div><div class="itin-day-sub">Himalayan sunrise views · UNESCO heritage</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=600&q=80" alt="Nagarkot" class="itin-day-img">
+        <div class="itin-point">Early morning drive to Nagarkot — famous for sunrise views of the Himalayas including Everest range on clear days</div>
+        <div class="itin-point">Return to Kathmandu, visit Patan Durbar Square (UNESCO site)</div>
+        <div class="itin-point">Patan Museum — one of the best museums in Asia showcasing Newari crafts</div>
+        <div class="itin-point">Evening at leisure — souvenir shopping in Thamel</div>
+      </div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">4</div>
+        <div class="itin-day-info"><div class="itin-day-title">Drive to Pokhara</div><div class="itin-day-sub">Scenic 6–7 hr drive along Prithvi Highway</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" alt="Pokhara Highway" class="itin-day-img">
+        <div class="itin-point">Morning drive from Kathmandu to Pokhara — scenic road through mountains and river gorges</div>
+        <div class="itin-point">Arrival at Pokhara — check in to lakeside hotel</div>
+        <div class="itin-point">Evening on Phewa Lake — boat ride with stunning Annapurna range backdrop</div>
+        <div class="itin-point">Lakeside promenade for dinner and local food exploration</div>
+      </div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">5</div>
+        <div class="itin-day-info"><div class="itin-day-title">Pokhara sightseeing</div><div class="itin-day-sub">Sarangkot sunrise · caves · World Peace Stupa</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <div class="itin-point">Early morning drive to Sarangkot viewpoint — breathtaking sunrise over Annapurna and Fishtail peaks</div>
+        <div class="itin-point">Devi's Falls (Patale Chhango) — a waterfall that disappears into an underground tunnel</div>
+        <div class="itin-point">Gupteshwor Mahadev Cave — sacred cave temple right next to the falls</div>
+        <div class="itin-point">World Peace Stupa — hilltop white stupa with 360° views of the Himalayas and the lake</div>
+        <img src="https://images.unsplash.com/photo-1585938389612-a552a28d6914?w=600&q=80" alt="Pokhara" class="itin-day-img">
+      </div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">6</div>
+        <div class="itin-day-info"><div class="itin-day-title">Chitwan National Park</div><div class="itin-day-sub">Jungle safari · elephant experience · rhinos</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <div class="itin-point">Drive or fly to Chitwan — UNESCO World Heritage jungle reserve</div>
+        <div class="itin-point">Jeep safari in the national park — one-horned rhinos, crocodiles, deer and if lucky, tigers</div>
+        <div class="itin-point">Elephant breeding centre visit — see and interact with baby elephants</div>
+        <div class="itin-point">Tharu cultural dance show in the evening at the jungle resort</div>
+        <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?w=600&q=80" alt="Chitwan" class="itin-day-img">
+      </div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">7</div>
+        <div class="itin-day-info"><div class="itin-day-title">Chitwan activities + return</div><div class="itin-day-sub">Canoe ride · bird watching · drive back</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80" alt="Chitwan River" class="itin-day-img">
+        <div class="itin-point">Morning canoe ride on Rapti River — spot gharials and marsh mugger crocodiles</div>
+        <div class="itin-point">Nature walk with a naturalist guide — birdwatching (Chitwan has 500+ bird species)</div>
+        <div class="itin-point">Drive back to Kathmandu</div>
+        <div class="itin-point">Farewell dinner and last shopping</div>
+      </div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)">
+        <div class="itin-day-num">8</div>
+        <div class="itin-day-info"><div class="itin-day-title">Departure</div><div class="itin-day-sub">Transfer to Kathmandu airport · fly home</div></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="itin-day-body">
+        <img src="https://images.unsplash.com/photo-1583267746897-2cf415887172?w=600&q=80" alt="Nepal Departure" class="itin-day-img">
+        <div class="itin-point">Morning transfer to Tribhuvan International Airport</div>
+        <div class="itin-point">Last-minute souvenirs at the airport — pashmina, thangka art, teas</div>
+        <div class="itin-point">Fly back to India</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout co-green"><h4>Why Nepal?</h4><p>Cheapest option by far. Zero visa hassle for Indians. Chitwan is brilliant for kids — jungle jeep safaris, elephant encounters, and crocodiles. Pokhara is one of the most scenic lake cities in Asia.</p></div>
+  <div class="callout co-amber"><h4>Watch out</h4><p>Monsoon starts late June — mountain views get cloudy. Best to travel in May if possible. Stick to cities and Chitwan for June travel rather than trekking areas.</p></div>
+</div>
+
+<!-- ═══════════ BHUTAN ═══════════ -->
+<div id="bhutan" class="sec">
+  <div class="sec-tag">Bhutan</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1553856622-d1b352e9a211?w=800&q=80" alt="Bhutan">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇧🇹</div>
+      <div class="dest-hero-name">Bhutan</div>
+      <div class="dest-hero-sub">Veena World BTJS · 9 Days / 8 Nights · Paro + Thimphu + Punakha + Phobjika</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-green" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹50,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹2.0 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">✅</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights</div><div class="qf-val green">Included ✓</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val green">FREE for Indians</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val green">All 3 meals daily</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val green">Included throughout</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val green">Not required</div></div>
+    <div class="qf"><div class="qf-label">Currency</div><div class="qf-val green">Indian ₹ works directly</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val green">Cool & clear ✓</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐⭐</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (Veena World BTJS)</span><span class="cb-row-val">₹42,000–52,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹2,100–2,600</span></div>
+    <div class="cb-row"><span class="cb-row-label">Visa</span><span class="cb-row-val" style="color:var(--accent2)">₹0 (free for Indians)</span></div>
+    <div class="cb-row"><span class="cb-row-label">SDF Permit</span><span class="cb-row-val" style="color:var(--accent2)">₹0 (waived for Indians)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Flights</span><span class="cb-row-val" style="color:var(--accent2)">Included</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping</span><span class="cb-row-val">~₹1,500 (₹6k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Personal / tips</span><span class="cb-row-val">~₹1,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">Insurance</span><span class="cb-row-val">Included (under 60)</span></div>
+    <div class="cb-total"><span>Total per person</span><span>~₹50,000</span></div>
+  </div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Tiger's Nest"><div class="gallery-item-label">Tiger's Nest Monastery</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80" alt="Punakha Dzong"><div class="gallery-item-label">Punakha Dzong</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=400&q=80" alt="Thimphu"><div class="gallery-item-label">Buddha Dordenma, Thimphu</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">1</div><div class="itin-day-info"><div class="itin-day-title">Arrive Paro</div><div class="itin-day-sub">One of the world's most scenic airports</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Fly into Paro International Airport — landing through mountain valleys is spectacular</div><div class="itin-point">Drive to Thimphu (1 hour) — check in to hotel</div><div class="itin-point">Evening stroll at Thimphu market and Clock Tower Square</div></div>
+        <img src="https://images.unsplash.com/photo-1553856622-d1b352e9a211?w=600&q=80" alt="Paro Valley" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">2</div><div class="itin-day-info"><div class="itin-day-title">Thimphu city tour</div><div class="itin-day-sub">Capital city · Buddha statue · Royal Takin Preserve</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Buddha Dordenma — massive gilded Buddha statue with panoramic views of the valley (51 meters tall)</div><div class="itin-point">Royal Takin Preserve — see the Takin, Bhutan's national animal (a bizarre goat-antelope hybrid)</div><div class="itin-point">Tashichho Dzong — fortress-monastery that houses the throne room and offices of the King</div><div class="itin-point">National Handicraft Center and Folk Heritage Museum</div></div>
+        <img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=600&q=80" alt="Thimphu" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">3</div><div class="itin-day-info"><div class="itin-day-title">Thimphu → Punakha</div><div class="itin-day-sub">Dochula Pass · Punakha Dzong</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive over Dochula Pass (3,100m) — 108 memorial chortens with stunning Himalayan views on clear days</div><div class="itin-point">Punakha Dzong — the most beautiful dzong in Bhutan, at the confluence of two rivers</div><div class="itin-point">Suspension bridge walk over the Mo Chhu river</div><div class="itin-point">Check in to Punakha resort</div><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80" alt="Punakha" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">4</div><div class="itin-day-info"><div class="itin-day-title">Punakha → Phobjika Valley</div><div class="itin-day-sub">Black-necked crane sanctuary · glacial valley</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive to Phobjika Valley — a glacial valley that is winter home to rare black-necked cranes</div><div class="itin-point">Gangtey Monastery — one of the most important Nyingma monasteries in Bhutan</div><div class="itin-point">Black-Necked Crane Information Center</div><div class="itin-point">Scenic walks through the valley farmland</div></div>
+        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80" alt="Phobjika Valley" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">5–6</div><div class="itin-day-info"><div class="itin-day-title">Paro valley + excursions</div><div class="itin-day-sub">Rinpung Dzong · traditional farmhouse visit</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive to Paro — check in to hotel</div><div class="itin-point">Rinpung Dzong (Paro Dzong) — fortress overlooking the Paro valley</div><div class="itin-point">National Museum of Bhutan — housed in a watchtower</div><div class="itin-point">Visit to a traditional Bhutanese farmhouse and interact with locals</div><div class="itin-point">Chele La Pass drive — highest motorable road in Bhutan at 3,988m</div></div>
+        <img src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?w=600&q=80" alt="Paro Valley" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">7</div><div class="itin-day-info"><div class="itin-day-title">Tiger's Nest Hike</div><div class="itin-day-sub">Paro Taktsang — the icon of Bhutan</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">The highlight of the trip — hike up to Tiger's Nest Monastery (Paro Taktsang), clinging to a cliffside at 3,120m</div><div class="itin-point">About 4–5 hour round trip hike — mules available for those who need assistance</div><div class="itin-point">The monastery dates to 1692 and is one of the most sacred sites in Bhutan</div><div class="itin-point">Packed lunch on the mountain — views are extraordinary</div><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Tiger's Nest" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">8–9</div><div class="itin-day-info"><div class="itin-day-title">Leisure + Departure</div><div class="itin-day-sub">Shopping · hot stone bath · fly home</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Traditional Bhutanese hot stone bath (dotsho) — a rejuvenating ritual</div><div class="itin-point">Shopping for handwoven textiles, wooden masks, incense, and Bhutanese crafts</div><div class="itin-point">Farewell dinner with local Bhutanese cuisine (ema datshi — chili cheese stew)</div><div class="itin-point">Transfer to Paro Airport and fly home</div></div>
+        <img src="https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?w=600&q=80" alt="Bhutan Crafts" class="itin-day-img">
+    </div>
+  </div>
+
+  <div class="callout co-green"><h4>Why Bhutan? 🏆</h4><p>The happiest country on earth. Zero pollution, no traffic signals, pristine mountains. Tiger's Nest is one of the most unforgettable family experiences anywhere. May–June has the best weather of all destinations. Indian Rupees accepted everywhere — no exchange needed.</p></div>
+  <div class="callout co-blue"><h4>Good to know</h4><p>Since 2023, Indians no longer need the Sustainable Development Fee (SDF) permit — a significant saving. Tours sometimes depart from Kolkata or Bagdogra, so check your departure city. Indian mobile SIMs work in Bhutan (BSNL roaming).</p></div>
+</div>
+
+<!-- ═══════════ SRI LANKA ═══════════ -->
+<div id="srilanka" class="sec">
+  <div class="sec-tag">Sri Lanka</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80" alt="Sri Lanka">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇱🇰</div>
+      <div class="dest-hero-name">Sri Lanka</div>
+      <div class="dest-hero-sub">Veena World ASSE · 7 Days / 6 Nights · Colombo + Kandy + Nuwara Eliya + Bentota + Galle</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-green" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹58,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹2.3 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">✅</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights</div><div class="qf-val green">Included (Mumbai↔CMB)</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val green">FREE for Indians</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val green">All 3 meals daily</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val green">Included throughout</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val green">Not required</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val amber">SW Monsoon (west coast)</div></div>
+    <div class="qf"><div class="qf-label">Currency</div><div class="qf-val">Sri Lankan Rupee (LKR)</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐⭐</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (Veena World ASSE)</span><span class="cb-row-val">₹48,000–58,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹2,400–2,900</span></div>
+    <div class="cb-row"><span class="cb-row-label">Visa</span><span class="cb-row-val" style="color:var(--accent2)">₹0 (gratis for Indians)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Flights</span><span class="cb-row-val" style="color:var(--accent2)">Included</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping</span><span class="cb-row-val">~₹2,000 (₹8k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Personal / tips</span><span class="cb-row-val">~₹1,500</span></div>
+    <div class="cb-row"><span class="cb-row-label">Insurance</span><span class="cb-row-val">Included (under 60)</span></div>
+    <div class="cb-total"><span>Total per person</span><span>~₹58,000</span></div>
+  </div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?w=400&q=80" alt="Kandy"><div class="gallery-item-label">Temple of the Tooth, Kandy</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=400&q=80" alt="Tea Estates"><div class="gallery-item-label">Nuwara Eliya Tea Estates</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&q=80" alt="Galle Fort"><div class="gallery-item-label">Galle Fort</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">1</div><div class="itin-day-info"><div class="itin-day-title">Arrive Colombo</div><div class="itin-day-sub">Pinnawala Elephant Orphanage en route</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Fly into Bandaranaike International Airport, Colombo</div><div class="itin-point">En route stop at Pinnawala Elephant Orphanage — watch elephants bathe in the river, feed baby elephants</div><div class="itin-point">Drive to Kandy and check in to hotel</div></div>
+        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80" alt="Elephants" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">2</div><div class="itin-day-info"><div class="itin-day-title">Kandy</div><div class="itin-day-sub">Temple of Tooth · Peradeniya Gardens · cultural show</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Sri Dalada Maligawa (Temple of the Sacred Tooth Relic) — one of the most sacred Buddhist sites in the world</div><div class="itin-point">Peradeniya Botanical Gardens — 147 acres of orchids, palms, and a massive Java fig tree</div><div class="itin-point">Kandy Lake stroll and Kandy town</div><div class="itin-point">Evening: traditional Kandyan dance performance</div><img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?w=600&q=80" alt="Kandy" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">3</div><div class="itin-day-info"><div class="itin-day-title">Nuwara Eliya</div><div class="itin-day-sub">Tea country · "Little England" of Sri Lanka</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Scenic drive up to Nuwara Eliya through rolling tea estates — one of the most beautiful drives in Asia</div><div class="itin-point">Ramboda Falls — dramatic waterfall on the mountain road</div><div class="itin-point">Sita Amman Temple — a Ramayana-linked temple at Seetha Eliya</div><div class="itin-point">Tea factory visit — see how Ceylon tea is processed and taste fresh brews</div><div class="itin-point">Gregory Lake in Nuwara Eliya — colonial charm and boat rides</div><img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&q=80" alt="Tea Estates" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">4</div><div class="itin-day-info"><div class="itin-day-title">Drive to Bentota</div><div class="itin-day-sub">Beach resort · turtle hatchery · water sports</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive from hill country down to the western coast — arrive at Bentota Beach</div><div class="itin-point">Kosgoda Sea Turtle Conservation Project — see hawksbill and green turtles up close</div><div class="itin-point">Madu Ganga River boat safari through mangroves — spot monitor lizards and water birds</div><div class="itin-point">Check in to Bentota beach hotel — evening on the beach</div></div>
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Bentota Beach" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">5</div><div class="itin-day-info"><div class="itin-day-title">Bentota beach day + Galle</div><div class="itin-day-sub">UNESCO fort · lighthouse · Dutch Quarter</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Morning beach time at Bentota — water sports (jet ski, banana boat) available at extra cost</div><div class="itin-point">Drive to Galle — UNESCO World Heritage Site and one of the best-preserved colonial fortresses in Asia</div><div class="itin-point">Walk along the fort ramparts with ocean views, visit the Dutch Reformed Church (1755) and the lighthouse</div><div class="itin-point">Galle Old Quarter — colonial Dutch architecture, boutique shops, gem stores</div><img src="https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=600&q=80" alt="Galle Fort" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">6–7</div><div class="itin-day-info"><div class="itin-day-title">Colombo + Departure</div><div class="itin-day-sub">City tour · shopping · fly home</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive back to Colombo</div><div class="itin-point">Colombo city tour — Gangaramaya Temple, Independence Square, Viharamahadevi Park</div><div class="itin-point">Shopping at Odel or Pettah Market — spices, batik, gems, tea</div><div class="itin-point">Transfer to airport and fly home</div></div>
+        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=600&q=80" alt="Colombo" class="itin-day-img">
+    </div>
+  </div>
+
+  <div class="callout co-green"><h4>Why Sri Lanka?</h4><p>Closest culturally to India. Elephant orphanage, scenic tea country, colonial forts, and beautiful beaches — all in one trip. Visa is currently free for Indians. The food will feel comfortably familiar.</p></div>
+  <div class="callout co-amber"><h4>Weather warning</h4><p>The southwest monsoon hits the west coast (Colombo, Bentota, Galle) hard in June. Ask Veena World specifically about June departure dates and whether east coast alternatives (Trincomalee — which is DRY in June) are available.</p></div>
+</div>
+
+<!-- ═══════════ BALI ═══════════ -->
+<div id="bali" class="sec">
+  <div class="sec-tag">Bali, Indonesia</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80" alt="Bali">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇮🇩</div>
+      <div class="dest-hero-name">Bali</div>
+      <div class="dest-hero-sub">Veena World ASBM · 7 Days / 6 Nights · Ubud + Kintamani + Nusa Penida + Seminyak</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-green" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹73,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹2.9 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">✅</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights</div><div class="qf-val green">Included (Mumbai↔DPS)</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val amber">VOA at airport · $35/person</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val green">All 3 meals daily</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val green">Included throughout</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val green">Not required for VOA</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val green">DRY SEASON ✓ Best time</div></div>
+    <div class="qf"><div class="qf-label">Currency</div><div class="qf-val">Indonesian Rupiah (IDR)</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐⭐⭐</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (Veena World ASBM)</span><span class="cb-row-val">₹58,000–68,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹2,900–3,400</span></div>
+    <div class="cb-row"><span class="cb-row-label">Visa on Arrival ($35)</span><span class="cb-row-val">~₹3,000/person (pay USD cash)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Flights</span><span class="cb-row-val" style="color:var(--accent2)">Included</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping</span><span class="cb-row-val">~₹2,500 (₹10k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Personal / tips</span><span class="cb-row-val">~₹1,500</span></div>
+    <div class="cb-row"><span class="cb-row-label">Insurance</span><span class="cb-row-val">Included (under 60)</span></div>
+    <div class="cb-total"><span>Total per person</span><span>~₹73,000</span></div>
+  </div>
+
+  <div class="callout co-green" style="margin-bottom:12px;"><h4>🌞 Perfect timing — May–June is Bali's DRY SEASON</h4><p>While Thailand, Vietnam and Sri Lanka deal with monsoon in May–June, Bali enjoys its best weather: clear skies, low humidity, perfect beach days. This alone makes Bali the standout pick for your travel window.</p></div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&q=80" alt="Tanah Lot"><div class="gallery-item-label">Tanah Lot Temple</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80" alt="Nusa Penida"><div class="gallery-item-label">Nusa Penida Cliffs</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=400&q=80" alt="Ubud"><div class="gallery-item-label">Ubud Rice Terraces</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">1</div><div class="itin-day-info"><div class="itin-day-title">Arrive Bali</div><div class="itin-day-sub">Visa on Arrival · hotel check-in · welcome</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Fly into Ngurah Rai International Airport, Bali</div><div class="itin-point">Queue at Visa on Arrival counter — pay $35/person in USD cash — takes ~10 min</div><div class="itin-point">Transfer to hotel in Seminyak or Kuta area</div><div class="itin-point">Evening: Seminyak beach sunset — Bali's famous sunsets are spectacular</div></div>
+        <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=600&q=80" alt="Bali Sunset" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">2</div><div class="itin-day-info"><div class="itin-day-title">Ubud cultural day</div><div class="itin-day-sub">Rice terraces · Monkey Forest · Ubud Palace</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Tegalalang Rice Terraces — the iconic stepped green terraces with the Bali Swing (extra cost for swing)</div><div class="itin-point">Sacred Monkey Forest Sanctuary — walk through ancient temples surrounded by macaque monkeys</div><div class="itin-point">Ubud Royal Palace (Puri Saren) and Ubud Art Market — best place to buy batik, handicrafts, and paintings</div><div class="itin-point">Tirta Empul Temple — sacred spring water temple where locals perform purification rituals</div><img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=600&q=80" alt="Ubud" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">3</div><div class="itin-day-info"><div class="itin-day-title">Kintamani volcano</div><div class="itin-day-sub">Mount Batur · Besakih temple · coffee plantation</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Kintamani Volcano — dramatic caldera views of Mount Batur and the crater lake</div><div class="itin-point">Besakih Temple (Mother Temple of Bali) — the largest and holiest Hindu temple complex in Bali</div><div class="itin-point">Coffee and spice plantation tour — taste Luwak coffee (the world's most unusual coffee), sample local spices and herbal teas</div><div class="itin-point">Lunch with caldera view — unforgettable setting</div></div>
+        <img src="https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=600&q=80" alt="Kintamani" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">4</div><div class="itin-day-info"><div class="itin-day-title">Bali Safari & Marine Park</div><div class="itin-day-sub">World-class wildlife experience · kids favourite</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Full day at Bali Safari and Marine Park — over 100 species including tigers, orangutans, Komodo dragons, rhinos, and elephants</div><div class="itin-point">Safari jungle ride in an open vehicle through naturalistic animal enclosures</div><div class="itin-point">Elephant interaction and photo experience</div><div class="itin-point">Water park within the complex — great for kids after the safari</div><div class="itin-point">Bali Agung Show — spectacular cultural performance with 150+ performers, fire dance, and animals</div></div>
+        <img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=600&q=80" alt="Bali Safari" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">5</div><div class="itin-day-info"><div class="itin-day-title">Nusa Penida day trip</div><div class="itin-day-sub">Crystal Bay · Kelingking Cliff · Angel's Billabong</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Speed boat from Sanur beach to Nusa Penida island — 30 minutes</div><div class="itin-point">Kelingking Beach — the iconic T-Rex shaped cliff with turquoise bay — one of Indonesia's most photographed spots</div><div class="itin-point">Angel's Billabong — a natural infinity pool in the rocks above the ocean</div><div class="itin-point">Broken Beach (Pasih Uug) — a circular cove with a natural arch</div><div class="itin-point">Crystal Bay — snorkelling with manta rays (seasonal) and pristine clear water</div><img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80" alt="Nusa Penida" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">6</div><div class="itin-day-info"><div class="itin-day-title">Tanah Lot + Tanjung Benoa</div><div class="itin-day-sub">Sea temple sunset · water sports beach</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Tanjung Benoa beach — water sports hub: banana boat, parasailing, jet ski, glass-bottom boat (extra cost)</div><div class="itin-point">Afternoon: Tanah Lot Temple — dramatic sea temple on a rock formation, most photographed temple in Bali</div><div class="itin-point">Stay for sunset — Tanah Lot at golden hour is magical</div><div class="itin-point">Farewell dinner at a beach restaurant in Seminyak</div><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Tanah Lot" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">7</div><div class="itin-day-info"><div class="itin-day-title">Departure</div><div class="itin-day-sub">Last shopping · fly home</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Morning at leisure — last shopping at Seminyak or Kuta market</div><div class="itin-point">Transfer to Ngurah Rai Airport</div><div class="itin-point">Fly back to India with incredible memories</div></div>
+        <img src="https://images.unsplash.com/photo-1540202404-a2f29016b523?w=600&q=80" alt="Bali Market" class="itin-day-img">
+    </div>
+  </div>
+
+  <div class="callout co-green"><h4>Why Bali? 🏆</h4><p>May–June is dry season — the best weather while everyone else deals with rain. 7 full nights. Safari Park for the kids, Nusa Penida for the adults, cultural temples, incredible food, and some of the best sunsets on earth. Visa is just $35 cash at the airport.</p></div>
+  <div class="callout co-blue"><h4>Visa tip</h4><p>Carry USD 35 per person in cash specifically for the Visa on Arrival counter. Exchange your USD in India before flying — rates are much better. The VOA queue at Ngurah Rai Airport usually moves in 10–15 minutes.</p></div>
+</div>
+
+<!-- ═══════════ MALAYSIA ═══════════ -->
+<div id="malaysia" class="sec">
+  <div class="sec-tag">Malaysia — Kuala Lumpur</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80" alt="Malaysia">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇲🇾</div>
+      <div class="dest-hero-name">Malaysia</div>
+      <div class="dest-hero-sub">Veena World ASKM · 4 Days / 3 Nights · KL + Genting Highlands + Putrajaya</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-green" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹71,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹2.8 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">✅</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights</div><div class="qf-val green">Included (Mumbai↔KL)</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val green">FREE — visa-free for Indians</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val green">All 3 meals daily</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val green">Included throughout</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val green">Not required</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val amber">Hot + showers · manageable</div></div>
+    <div class="qf"><div class="qf-label">Duration</div><div class="qf-val amber">Short — 4 days only</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐⭐⭐</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (May 2026)</span><span class="cb-row-val">₹65,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹3,250</span></div>
+    <div class="cb-row"><span class="cb-row-label">Visa</span><span class="cb-row-val" style="color:var(--accent2)">₹0 (visa-free)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Flights</span><span class="cb-row-val" style="color:var(--accent2)">Included</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping</span><span class="cb-row-val">~₹1,500 (₹6k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Personal / tips</span><span class="cb-row-val">~₹1,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">Insurance</span><span class="cb-row-val">Included (under 60)</span></div>
+    <div class="cb-total"><span>Total per person</span><span>~₹71,000</span></div>
+  </div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=400&q=80" alt="Petronas"><div class="gallery-item-label">Petronas Twin Towers</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=400&q=80" alt="Batu Caves"><div class="gallery-item-label">Batu Caves</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1543731068-7e0f5beff43a?w=400&q=80" alt="Genting"><div class="gallery-item-label">Genting Highlands</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">1</div><div class="itin-day-info"><div class="itin-day-title">Arrive KL + Genting Highlands</div><div class="itin-day-sub">Sky Worlds outdoor theme park</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Fly into Kuala Lumpur International Airport (KLIA)</div><div class="itin-point">Drive directly to Genting Highlands (1 hour from KL) — a cool hill resort at 1,800m elevation</div><div class="itin-point">Genting Sky Worlds — brand new international theme park with rides themed around DreamWorks, 20th Century Fox, and Lionsgate</div><div class="itin-point">Overnight stay at Genting — kids will love it</div><img src="https://images.unsplash.com/photo-1543731068-7e0f5beff43a?w=600&q=80" alt="Genting" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">2</div><div class="itin-day-info"><div class="itin-day-title">KL City + Batu Caves + Aquaria</div><div class="itin-day-sub">Temples · underwater world · city skyline</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Batu Caves — massive limestone caves with the 43m golden Lord Murugan statue (272 steps up to the main cave)</div><div class="itin-point">KL Bird Park — the world's largest free-flight aviary with 3,000+ birds</div><div class="itin-point">Aquaria KLCC — oceanarium right below the Petronas Towers, with a walk-through shark tank and touch pools</div><div class="itin-point">Petronas Twin Towers photo stop — the iconic twin towers are 30 minutes walk from Aquaria</div><img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=600&q=80" alt="Batu Caves" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">3</div><div class="itin-day-info"><div class="itin-day-title">KL Tower + Putrajaya</div><div class="itin-day-sub">Observatory deck · federal garden city</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">KL Tower Observatory Deck — 360° panoramic views of Kuala Lumpur from 276m up</div><div class="itin-point">Putrajaya City Tour — Malaysia's futuristic planned federal capital, 25km from KL</div><div class="itin-point">Putra Mosque — iconic pink mosque on the lake (Putrajaya Lake)</div><div class="itin-point">Evening at Jalan Alor — KL's famous food street for hawker food</div></div>
+        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80" alt="KL Skyline" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">4</div><div class="itin-day-info"><div class="itin-day-title">Departure</div><div class="itin-day-sub">Last shopping · fly home</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Morning shopping at Bukit Bintang or Petaling Street (Chinatown)</div><div class="itin-point">Transfer to KLIA and fly back to India</div></div>
+        <img src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=600&q=80" alt="KL Shopping" class="itin-day-img">
+    </div>
+  </div>
+
+  <div class="callout co-green"><h4>Why Malaysia?</h4><p>The most all-inclusive group tour: flights + all meals + sightseeing + tour manager + visa-free, all in ₹65k. Genting Sky Worlds is a world-class theme park that kids will go crazy over. Very familiar food for Indian families.</p></div>
+  <div class="callout co-amber"><h4>Watch out</h4><p>Only 4 days / 3 nights — the shortest trip on this list. If your family wants a longer holiday, Bali (7 nights) or Bhutan (9 nights) offer much more time. Malaysia works great if you want a quick, jam-packed getaway.</p></div>
+</div>
+
+<!-- ═══════════ THAILAND ═══════════ -->
+<div id="thailand" class="sec">
+  <div class="sec-tag">Thailand</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80" alt="Thailand">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇹🇭</div>
+      <div class="dest-hero-name">Thailand</div>
+      <div class="dest-hero-sub">Veena World · 6 Days / 5 Nights · Bangkok + Pattaya</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-green" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹72,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹2.9 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">✅</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights</div><div class="qf-val green">Included (Mumbai↔BKK)</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val green">FREE since Nov 2024</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val green">All 3 meals daily</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val green">Included throughout</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val amber">~₹20k/person recommended</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val amber">Rainy season · manageable</div></div>
+    <div class="qf"><div class="qf-label">Currency</div><div class="qf-val">Thai Baht (THB)</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐⭐⭐</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (Veena World Thailand)</span><span class="cb-row-val">₹55,000–70,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹2,750–3,500</span></div>
+    <div class="cb-row"><span class="cb-row-label">Visa</span><span class="cb-row-val" style="color:var(--accent2)">₹0 (visa-free since Nov 2024)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Flights</span><span class="cb-row-val" style="color:var(--accent2)">Included</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping</span><span class="cb-row-val">~₹3,000 (₹12k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Personal / tips</span><span class="cb-row-val">~₹1,500</span></div>
+    <div class="cb-row"><span class="cb-row-label">Insurance</span><span class="cb-row-val">Included (under 60)</span></div>
+    <div class="cb-total"><span>Total per person</span><span>~₹72,000</span></div>
+  </div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&q=80" alt="Bangkok"><div class="gallery-item-label">Bangkok temples</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400&q=80" alt="Coral Island"><div class="gallery-item-label">Coral Island, Pattaya</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=400&q=80" alt="Safari World"><div class="gallery-item-label">Safari World & Marine Park</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">1</div><div class="itin-day-info"><div class="itin-day-title">Arrive Bangkok</div><div class="itin-day-sub">Hotel check-in · Chao Phraya River dinner cruise</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Fly into Suvarnabhumi International Airport (BKK)</div><div class="itin-point">Transfer to hotel in Bangkok</div><div class="itin-point">Evening: Chao Phraya River dinner cruise — floating along Bangkok's main river past illuminated temples and bridges while enjoying dinner on board</div></div>
+        <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=600&q=80" alt="Bangkok River" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">2</div><div class="itin-day-info"><div class="itin-day-title">Safari World + Marine Park</div><div class="itin-day-sub">Full-day wildlife and marine adventure</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Safari World — open-air wildlife drive through savanna with lions, giraffes, rhinos, zebras, and orangutans</div><div class="itin-point">Marine Park — Hollywood stunt show, orangutan boxing show, dolphin and sea lion shows</div><div class="itin-point">One of the best family days out in all of Southeast Asia</div><img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=600&q=80" alt="Safari World" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">3</div><div class="itin-day-info"><div class="itin-day-title">Drive to Pattaya</div><div class="itin-day-sub">Nong Nooch village · Alcazar show</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive from Bangkok to Pattaya (2 hours along expressway)</div><div class="itin-point">Nong Nooch Tropical Garden — massive botanical garden with elephant shows, Thai cultural performances, and sculptured topiaries</div><div class="itin-point">Gems Gallery — Thailand's famous gem showcase with massive showroom</div><div class="itin-point">Evening: Alcazar Cabaret Show — spectacular 90-minute entertainment extravaganza</div></div>
+        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&q=80" alt="Nong Nooch" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">4</div><div class="itin-day-info"><div class="itin-day-title">Coral Island</div><div class="itin-day-sub">Speed boat · snorkelling · beach day</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Speed boat ride from Bali Hai Pier to Coral Island (Koh Larn) — 45 minutes</div><div class="itin-point">Crystal-clear waters and white sand beaches</div><div class="itin-point">Water activities: glass-bottom boat ride, parasailing, banana boat, snorkelling (extra cost)</div><div class="itin-point">Fresh seafood lunch on the island</div><img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" alt="Coral Island" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">5</div><div class="itin-day-info"><div class="itin-day-title">Pattaya Tower + shopping</div><div class="itin-day-sub">Art in Paradise · Pattaya Walking Street</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Pattaya Tower — tallest observation tower in Pattaya with panoramic views</div><div class="itin-point">Art in Paradise — interactive 3D art museum where you become part of the paintings — brilliant for family photos</div><div class="itin-point">Shopping at Central Festival Mall or Jomtien Night Market</div><div class="itin-point">Thai massage — a must-do! (~₹600-800 for 1 hour)</div></div>
+        <img src="https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=600&q=80" alt="Pattaya" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">6</div><div class="itin-day-info"><div class="itin-day-title">Departure</div><div class="itin-day-sub">Drive to Bangkok · fly home</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive back to Bangkok</div><div class="itin-point">Last-minute shopping at Chatuchak or airport duty-free</div><div class="itin-point">Fly back to India from Suvarnabhumi Airport</div></div>
+        <img src="https://images.unsplash.com/photo-1583309219338-a582f1f9ca6b?w=600&q=80" alt="Bangkok Airport" class="itin-day-img">
+    </div>
+  </div>
+
+  <div class="callout co-green"><h4>Why Thailand?</h4><p>Now visa-free for Indians since late 2024. Safari World is genuinely one of the best family days out in Asia. Low season in May–June means fewer tourists and lower prices. Coral Island boat trip is brilliant for kids.</p></div>
+  <div class="callout co-amber"><h4>Weather note</h4><p>May–June is rainy season but rain usually comes in short afternoon bursts, not all day. Bangkok and Pattaya are more manageable than beach islands in this season. Avoid Phuket and Koh Samui in June — those get heavier rain.</p></div>
+</div>
+
+<!-- ═══════════ VIETNAM ═══════════ -->
+<div id="vietnam" class="sec">
+  <div class="sec-tag">Vietnam — over budget</div>
+  <div class="ob-stripe">⚠ Exceeds ₹80k/person target — included for complete reference</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80" alt="Vietnam">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇻🇳</div>
+      <div class="dest-hero-name">Vietnam</div>
+      <div class="dest-hero-sub">Veena World SHVN4 · 7 Days / 6 Nights · Hanoi + Ha Long Bay + Ho Chi Minh City</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-red" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹1,20,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹4.8 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">❌</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights (intl.)</div><div class="qf-val green">Included</div></div>
+    <div class="qf"><div class="qf-label">Internal flight</div><div class="qf-val red">NOT included — extra ~₹5k/person</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val amber">E-visa required · $25/person</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val green">Most meals included</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val amber">On request (customised)</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val green">No official minimum</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val red">Monsoon in North Vietnam ❌</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (Veena World SHVN4)</span><span class="cb-row-val">₹76,000–82,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹3,800–4,100</span></div>
+    <div class="cb-row"><span class="cb-row-label">E-visa ($25)</span><span class="cb-row-val" style="color:var(--warn)">~₹2,100 (apply at evisa.gov.vn)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Internal flight HAN→HCMC</span><span class="cb-row-val" style="color:var(--danger)">~₹5,000 extra / person (not in package)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping</span><span class="cb-row-val">~₹2,000 (₹8k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Personal / tips</span><span class="cb-row-val">~₹1,500</span></div>
+    <div class="cb-row"><span class="cb-row-label">Insurance</span><span class="cb-row-val">~₹1,500 (customised — check)</span></div>
+    <div class="cb-total"><span style="color:var(--danger);font-weight:500;">Total per person — OVER BUDGET</span><span style="color:var(--danger);">~₹1,20,000</span></div>
+  </div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80" alt="Ha Long Bay"><div class="gallery-item-label">Ha Long Bay cruise</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&q=80" alt="Hanoi"><div class="gallery-item-label">Hoan Kiem Lake, Hanoi</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&q=80" alt="Ho Chi Minh"><div class="gallery-item-label">Ho Chi Minh City</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">1</div><div class="itin-day-info"><div class="itin-day-title">Arrive Hanoi</div><div class="itin-day-sub">Old Quarter · Hoan Kiem Lake</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Fly into Noi Bai International Airport, Hanoi</div><div class="itin-point">Transfer to hotel in the Old Quarter</div><div class="itin-point">Evening stroll around Hoan Kiem Lake and Ngoc Son Temple (on an island in the lake)</div><div class="itin-point">Hanoi Old Quarter food walk — pho, banh mi, egg coffee</div></div>
+        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=600&q=80" alt="Hanoi" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">2</div><div class="itin-day-info"><div class="itin-day-title">Hanoi city tour</div><div class="itin-day-sub">Ho Chi Minh complex · Temple of Literature · Tran Quoc Pagoda</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Ho Chi Minh Mausoleum Complex — visit the embalmed body of Ho Chi Minh, the Presidential Palace, and Ho Chi Minh's stilt house</div><div class="itin-point">Temple of Literature — Vietnam's first university, dating to 1070, set in beautiful gardens</div><div class="itin-point">Tran Quoc Pagoda — oldest Buddhist pagoda in Hanoi, on the West Lake</div><div class="itin-point">Vietnamese Water Puppet Show — a unique art form indigenous to the Red River Delta</div></div>
+        <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600&q=80" alt="Hanoi Temples" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">3</div><div class="itin-day-info"><div class="itin-day-title">Ha Long Bay overnight cruise</div><div class="itin-day-sub">UNESCO World Heritage · 1,600+ limestone islands</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive from Hanoi to Ha Long (4 hours) and board cruise junk</div><div class="itin-point">Cruise through Ha Long Bay — arguably the most beautiful seascape in Southeast Asia</div><div class="itin-point">Kayaking through limestone caves and hidden lagoons</div><div class="itin-point">Sung Sot (Surprise) Cave — spectacular illuminated cave system</div><div class="itin-point">Seafood dinner on the boat under the stars</div><div class="itin-point">Overnight on the cruise — sleeping in Ha Long Bay is magical</div><img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=600&q=80" alt="Ha Long Bay" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">4</div><div class="itin-day-info"><div class="itin-day-title">Return Hanoi → fly to HCMC</div><div class="itin-day-sub">Internal flight not included in package price</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Morning: sunrise on Ha Long Bay, tai chi on the deck, return to harbour</div><div class="itin-point">Drive back to Hanoi (4 hours)</div><div class="itin-point">Internal flight Hanoi (HAN) → Ho Chi Minh City (SGN) — approximately 2 hours — NOTE: this is NOT included in the package, budget ~₹5,000/person extra</div><div class="itin-point">Check in to hotel in Ho Chi Minh City (Saigon)</div></div>
+        <img src="https://images.unsplash.com/photo-1583267746897-2cf415887172?w=600&q=80" alt="Vietnam Flight" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">5</div><div class="itin-day-info"><div class="itin-day-title">Cu Chi Tunnels + HCMC tour</div><div class="itin-day-sub">War history · vibrant city · Ben Thanh Market</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Cu Chi Tunnels — the remarkable 250km underground tunnel network used by Viet Cong during the Vietnam War. Crawl through sections if you dare!</div><div class="itin-point">War Remnants Museum — powerful and sobering Vietnam War photography museum</div><div class="itin-point">Reunification Palace — the former Presidential Palace, preserved exactly as it was in 1975</div><div class="itin-point">Ben Thanh Market — HCMC's most famous market for street food and souvenirs</div></div>
+        <img src="https://images.unsplash.com/photo-1583309219338-a582f1f9ca6b?w=600&q=80" alt="Ho Chi Minh City" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">6</div><div class="itin-day-info"><div class="itin-day-title">Mekong Delta</div><div class="itin-day-sub">River boat · fruit orchards · coconut candy factory</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Drive to My Tho (65km from HCMC) and take a boat ride on the Mekong Delta</div><div class="itin-point">Visit a coconut candy cottage industry — watch how coconut candy is made and sample it fresh</div><div class="itin-point">Row boat ride through narrow water coconut canals</div><div class="itin-point">Tropical fruit orchard visit — taste dragon fruit, rambutan, jackfruit, and longan straight from the tree</div><div class="itin-point">Traditional Vietnamese folk music performance on the island</div></div>
+        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&q=80" alt="Mekong Delta" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">7</div><div class="itin-day-info"><div class="itin-day-title">Departure from HCMC</div><div class="itin-day-sub">Last shopping · fly home</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Morning at leisure — Dong Khoi Street for last-minute shopping (lacquerware, silk, coffee)</div><div class="itin-point">Transfer to Tan Son Nhat International Airport, Ho Chi Minh City</div><div class="itin-point">Fly back to India</div></div>
+        <img src="https://images.unsplash.com/photo-1522547902298-51566e4fb383?w=600&q=80" alt="Vietnam Shopping" class="itin-day-img">
+    </div>
+  </div>
+
+  <div class="callout co-red"><h4>Why it's over budget</h4><p>Package alone is ₹76–82k. Add internal flight (~₹5k), e-visa (~₹2.1k), GST, insurance — total crosses ₹1.2 lakh per person. If budget is flexible, Vietnam is extraordinary. If not, Bali gives you more value for the same window.</p></div>
+  <div class="callout co-red"><h4>Weather is a real concern</h4><p>North Vietnam (Hanoi, Ha Long Bay) gets heavy monsoon rains in June. The overnight cruise — the trip highlight — can be severely affected by rough seas and poor visibility. If you do Vietnam, ideally go October–March.</p></div>
+  <div class="callout co-blue"><h4>E-visa tip</h4><p>Apply at evisa.gov.vn — official government portal, $25 for single entry (90-day validity). Apply at least 7–10 days before travel. Download and print the approved e-visa to show at immigration.</p></div>
+</div>
+
+<!-- ═══════════ SINGAPORE ═══════════ -->
+<div id="singapore" class="sec">
+  <div class="sec-tag">Singapore — significantly over budget</div>
+  <div class="ob-stripe">⚠ Well over ₹80k/person — most expensive destination on this list</div>
+  <div class="dest-hero">
+    <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80" alt="Singapore">
+    <div class="dest-hero-overlay"></div>
+    <div class="dest-hero-body">
+      <div class="dest-hero-flag">🇸🇬</div>
+      <div class="dest-hero-name">Singapore</div>
+      <div class="dest-hero-sub">Veena World SHSG11 · 5 Days / 4 Nights · Singapore city-state</div>
+    </div>
+  </div>
+
+  <div class="total-banner tb-red" style="margin-bottom:12px;">
+    <div><div class="tb-label" style="color:rgba(245,242,236,.7);">All-in per person</div><div class="tb-amount">~₹1,50,000</div><div class="tb-note" style="color:rgba(245,242,236,.6);">Family of 4 total: ~₹6.0 lakh</div></div>
+    <div style="text-align:right;"><div style="font-size:10px;color:rgba(245,242,236,.6);margin-bottom:4px;">Budget fit</div><div style="font-size:20px;">❌</div></div>
+  </div>
+
+  <div class="qf-grid">
+    <div class="qf"><div class="qf-label">Flights</div><div class="qf-val red">Verify with Veena World first</div></div>
+    <div class="qf"><div class="qf-label">Visa</div><div class="qf-val red">Required · ₹3,100/person</div></div>
+    <div class="qf"><div class="qf-label">Meals</div><div class="qf-val amber">Breakfast only</div></div>
+    <div class="qf"><div class="qf-label">Tour Manager</div><div class="qf-val amber">On request (customised)</div></div>
+    <div class="qf"><div class="qf-label">Bank balance</div><div class="qf-val red">₹50–80k/person in bank statement</div></div>
+    <div class="qf"><div class="qf-label">May–June weather</div><div class="qf-val green">Consistent year-round ✓</div></div>
+    <div class="qf"><div class="qf-label">Daily cost</div><div class="qf-val red">Very expensive city</div></div>
+    <div class="qf"><div class="qf-label">Kids rating</div><div class="qf-val">⭐⭐⭐⭐⭐ (best)</div></div>
+  </div>
+
+  <div class="cb-card">
+    <div class="cb-title">Cost breakdown per person</div>
+    <div class="cb-row"><span class="cb-row-label">Package (Veena World SHSG11)</span><span class="cb-row-val">₹84,000–90,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">GST 5%</span><span class="cb-row-val">~₹4,200–4,500</span></div>
+    <div class="cb-row"><span class="cb-row-label">Visa (₹2,100 + ₹1,000 agent)</span><span class="cb-row-val" style="color:var(--danger)">₹3,100/person</span></div>
+    <div class="cb-row"><span class="cb-row-label">Flights (if not included)</span><span class="cb-row-val" style="color:var(--danger)">~₹30,000–35,000 extra</span></div>
+    <div class="cb-row"><span class="cb-row-label">Meals (lunch + dinner · 4 days)</span><span class="cb-row-val" style="color:var(--danger)">~₹8,000 (SG is very expensive)</span></div>
+    <div class="cb-row"><span class="cb-row-label">MRT / Grab rides</span><span class="cb-row-val">~₹2,000</span></div>
+    <div class="cb-row"><span class="cb-row-label">Shopping (Orchard Road)</span><span class="cb-row-val">~₹5,000 (₹20k family)</span></div>
+    <div class="cb-row"><span class="cb-row-label">Insurance</span><span class="cb-row-val">~₹2,000 (check policy)</span></div>
+    <div class="cb-total"><span style="color:var(--danger);font-weight:500;">Total per person — OVER BUDGET</span><span style="color:var(--danger);">~₹1,50,000</span></div>
+  </div>
+
+  <div class="gallery-title">Must-see places</div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=400&q=80" alt="Marina Bay"><div class="gallery-item-label">Marina Bay Sands</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=400&q=80" alt="Gardens by the Bay"><div class="gallery-item-label">Gardens by the Bay</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1444090542259-0af8fa96557e?w=400&q=80" alt="Sentosa"><div class="gallery-item-label">Sentosa Island</div></div>
+  </div>
+
+  <div class="itin-card">
+    <div class="itin-title">Day-wise itinerary</div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">1</div><div class="itin-day-info"><div class="itin-day-title">Arrive Singapore</div><div class="itin-day-sub">Changi Airport · city orientation · Night Safari</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Fly into Singapore Changi Airport — consistently rated the world's best airport (Jewel Changi with 40m indoor waterfall is itself worth seeing)</div><div class="itin-point">Hotel check-in and freshen up</div><div class="itin-point">Evening: Singapore Night Safari — the world's first nocturnal zoo. See over 130 species of animals in naturalistic habitats by night. Tram ride included.</div></div>
+        <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=80" alt="Singapore Night" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">2</div><div class="itin-day-info"><div class="itin-day-title">City tour + Gardens by the Bay</div><div class="itin-day-sub">Marina Bay · Merlion · Supertrees · Cloud Forest</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Singapore half-day city tour — Merlion Park, Marina Bay, colonial heritage buildings, Little India, Chinatown, Arab Street</div><div class="itin-point">Gardens by the Bay — Cloud Forest (5-storey indoor mountain waterfall + rare highland plants) + Flower Dome (world's largest glass greenhouse) — truly spectacular</div><div class="itin-point">Jurassic World: The Experience exhibition at Cloud Forest (included in package)</div><div class="itin-point">Marina Bay Sands Skypark observation deck for golden hour views (extra cost)</div><img src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=600&q=80" alt="Gardens by the Bay" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">3</div><div class="itin-day-info"><div class="itin-day-title">Universal Studios Singapore</div><div class="itin-day-sub">Full day at Resorts World Sentosa</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Full day at Universal Studios Singapore — 7 themed zones including Hollywood, New York, Sci-Fi City, Ancient Egypt, The Lost World, Far Far Away (Shrek), and the new Minion Land</div><div class="itin-point">Standard admission included in package</div><div class="itin-point">Highlights: Transformers The Ride, Battlestar Galactica roller coasters, Jurassic Park Rapids Adventure</div><div class="itin-point">The kids will remember this day forever</div></div>
+        <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=600&q=80" alt="Universal Studios" class="itin-day-img">
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">4</div><div class="itin-day-info"><div class="itin-day-title">Sentosa Island full day</div><div class="itin-day-sub">95-token Fun Discover Pass · Cable Car · beaches</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Sentosa Fun Discover Pass (95 tokens) + one-way Cable Car — included in package</div><div class="itin-point">Use tokens for: Luge & Skyride, Wings of Time (sunset show), iFly Singapore (indoor skydiving), Madame Tussauds, and more</div><div class="itin-point">Siloso Beach, Palawan Beach, or Tanjong Beach — Singapore's best beaches</div><div class="itin-point">Sentosa Boardwalk walk back to VivoCity mall for dinner and shopping</div><img src="https://images.unsplash.com/photo-1444090542259-0af8fa96557e?w=600&q=80" alt="Sentosa" class="itin-day-img"></div>
+    </div>
+    <div class="itin-day">
+      <div class="itin-day-header" onclick="toggleDay(this)"><div class="itin-day-num">5</div><div class="itin-day-info"><div class="itin-day-title">Departure</div><div class="itin-day-sub">Orchard Road · Changi Airport · fly home</div></div><span class="chev">▾</span></div>
+      <div class="itin-day-body"><div class="itin-point">Morning: Orchard Road — Singapore's famous shopping boulevard. Duty-free picks: electronics, cosmetics, chocolates.</div><div class="itin-point">Transfer to Changi Airport</div><div class="itin-point">Explore Changi's Jewel — 40m indoor rain vortex, garden walks, butterfly garden</div><div class="itin-point">Fly back to India</div></div>
+        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&q=80" alt="Orchard Road" class="itin-day-img">
+    </div>
+  </div>
+
+  <div class="callout co-green"><h4>What makes Singapore special</h4><p>The single best destination for kids on this entire list. Universal Studios, Night Safari, Sentosa, Gardens by the Bay — all world-class. Consistently safe, English-speaking, immaculately clean, and well-organised. Weather is good year-round.</p></div>
+  <div class="callout co-red"><h4>Why it's so expensive</h4><p>Singapore is one of the world's most expensive cities. Only breakfast is covered — a family lunch easily costs ₹1,500–2,500 and dinner ₹2,000–4,000. Add flights (if not included — verify!), visa (₹3,100/person), Grab rides, and Orchard Road shopping. The numbers stack up fast.</p></div>
+  <div class="callout co-blue"><h4>Visa important notes</h4><p>Apply via an authorised Veena World visa agent 3–4 weeks before travel. Show ₹50,000–80,000 bank balance per person maintained consistently over the last 6 months in your statement. Fee: ₹2,100 govt + ₹1,000 agent = ₹3,100 per person. Visa takes 3–5 working days.</p></div>
+</div>
+
+<!-- ═══════════ TIPS ═══════════ -->
+<div id="tips" class="sec">
+  <div class="sec-tag">Planning guide</div>
+
+  <div class="verdict" style="margin-bottom:16px;">
+    <div class="verdict-tag">Final recommendation</div>
+    <h3>Book Bali or Bhutan</h3>
+    <p>Both have perfect weather in May–June while others deal with monsoon. Bali is the full tropical holiday experience. Bhutan is quieter, more unique, and the most hassle-free for Indians. Call Veena World 8–10 weeks before travel and book early — seats fill up fast in May–June.</p>
+  </div>
+
+  <div class="tip-block">
+    <div class="tip-block-title">Booking checklist</div>
+    <ul class="tip-list">
+      <li>Call Veena World on <strong>1800 313 5555</strong> for exact May–June 2026 pricing and available seats</li>
+      <li>Book 6–8 weeks in advance minimum — prices increase as seats fill up</li>
+      <li>For Bali: carry USD 35 per person in cash for Visa on Arrival. Exchange USD in India before flying (much better rates)</li>
+      <li>For Singapore: confirm whether flights are included (it's listed as "customised holiday") before booking</li>
+      <li>All Veena World packages attract 5% GST over quoted price — factor this in</li>
+      <li>TCS at 5% also applies on GST-inclusive price — you claim it back when filing ITR</li>
+      <li>Travel insurance is included in most Veena World group tours for guests under 60 — guests above 60 pay extra</li>
+      <li>Carry local currency cash at every destination — not all places accept cards, especially street food stalls and small shops</li>
+      <li>All packages are priced on twin-sharing basis — family of 4 gets 2 rooms</li>
+      <li>Check if children have any age/fare concessions — some Veena World packages offer child rates</li>
+    </ul>
+  </div>
+
+  <div class="tip-block">
+    <div class="tip-block-title">Visa at a glance — all 8 destinations</div>
+    <ul class="tip-list">
+      <li><strong>🇳🇵 Nepal</strong> — Just show Indian passport at immigration. Zero cost, zero process. Indians are completely visa-free.</li>
+      <li><strong>🇧🇹 Bhutan</strong> — Visa-free for Indians since 2023 rule change. No SDF sustainability fee either. Just carry your passport (or voter ID).</li>
+      <li><strong>🇱🇰 Sri Lanka</strong> — Currently free (gratis) for Indian tourists. Confirm before travel — policy may change.</li>
+      <li><strong>🇮🇩 Bali</strong> — Visa on Arrival at Ngurah Rai Airport. Pay USD 35 cash per person. Done in 10–15 minutes. No pre-application needed.</li>
+      <li><strong>🇲🇾 Malaysia</strong> — Completely visa-free for Indian passport holders. Walk straight through immigration.</li>
+      <li><strong>🇹🇭 Thailand</strong> — Visa-free for Indians since November 2024. Show passport, get stamped, walk in. Valid for 60 days.</li>
+      <li><strong>🇻🇳 Vietnam</strong> — E-visa required. Apply at evisa.gov.vn (official govt portal). $25 for single entry. Takes 3–7 working days. Print the e-visa and carry it.</li>
+      <li><strong>🇸🇬 Singapore</strong> — Visa required. Apply through a Veena World authorised agent 3–4 weeks ahead. ₹2,100 govt fee + ₹1,000 agent fee per person. Show ₹50,000–80,000 bank balance per person in 6-month statement.</li>
+    </ul>
+  </div>
+
+  <div class="wx-grid">
+    <div class="wx-card"><div class="wx-flag">🇮🇩</div><div class="wx-name" style="color:var(--accent2);">Bali 🟢 DRY SEASON</div><div class="wx-desc">Perfect. Clear skies, low humidity, ideal beach weather. Best time of year.</div></div>
+    <div class="wx-card"><div class="wx-flag">🇧🇹</div><div class="wx-name" style="color:var(--accent2);">Bhutan 🟢 Cool & clear</div><div class="wx-desc">Pre-monsoon. Pleasant temperatures 15–22°C. Mountain views clear.</div></div>
+    <div class="wx-card"><div class="wx-flag">🇸🇬</div><div class="wx-name" style="color:var(--warn);">Singapore 🟡 Consistent</div><div class="wx-desc">Year-round warmth. Occasional showers but never all-day rain.</div></div>
+    <div class="wx-card"><div class="wx-flag">🇹🇭</div><div class="wx-name" style="color:var(--warn);">Thailand 🟡 Rainy season</div><div class="wx-desc">Short afternoon showers. Bangkok + Pattaya fine. Avoid beach islands.</div></div>
+    <div class="wx-card"><div class="wx-flag">🇳🇵</div><div class="wx-name" style="color:var(--warn);">Nepal 🟡 Pre-monsoon</div><div class="wx-desc">Hot in May. Monsoon starts June. Mountain views cloudy. Stick to cities.</div></div>
+    <div class="wx-card"><div class="wx-flag">🇲🇾</div><div class="wx-name" style="color:var(--warn);">Malaysia 🟡 Hot + showers</div><div class="wx-desc">Tropical climate year-round. Afternoon showers common but manageable.</div></div>
+    <div class="wx-card"><div class="wx-flag">🇱🇰</div><div class="wx-name" style="color:var(--danger);">Sri Lanka 🔴 SW Monsoon</div><div class="wx-desc">West coast (Colombo, Galle, Bentota) gets heavy rain in June.</div></div>
+    <div class="wx-card"><div class="wx-flag">🇻🇳</div><div class="wx-name" style="color:var(--danger);">Vietnam 🔴 Heavy monsoon</div><div class="wx-desc">North Vietnam monsoon. Ha Long Bay cruise affected. Not recommended.</div></div>
+  </div>
+
+  <p class="fn">This guide was prepared in March 2026. All prices are estimates based on Veena World packages and publicly available visa/flight data. Confirm exact rates, departure dates, and inclusions with Veena World (1800 313 5555) before booking. Prices are per person on twin-sharing basis. GST (5%) and TCS (5%) are additional. Travel insurance for guests 60+ is extra. Images are representative of destinations — actual sightseeing as per Veena World itinerary.</p>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleDay(header) {
+  const body = header.nextElementSibling;
+  const chev = header.querySelector('.chev');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chev.classList.toggle('open', !isOpen);
+}
+</script>
+</body>
+</html>
